@@ -59,6 +59,16 @@ public class Twittertest {
         statuses = twitter.getUserTimeline();
         System.out.println("Status--- "+statuses);
        
+        //------Post tweet
+        twitter4j.Twitter mtwitter = TwitterFactory.getSingleton();
+        Status mstatus = twitter.updateStatus("Hola Mundo desde Java");
+        System.out.println("Exito al actualizar estado [" + mstatus.getText() + "].");
+        
+        //--- Enviar y recibir mensajes directos
+        /*
+        twitter4j.Twitter sender = TwitterFactory.getSingleton();
+        twitter4j.DirectMessage  message = sender.sendDirectMessage("@pancho77", "Hola desde Java");*/
+        
     }
 }
 
