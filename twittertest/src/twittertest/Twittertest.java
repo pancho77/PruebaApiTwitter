@@ -12,10 +12,6 @@ import twitter4j.TwitterFactory;
 import twitter4j.User;
 import twitter4j.conf.ConfigurationBuilder;
 
-/**
- *
- * @author panxo
- */
 public class Twittertest {
 
     /**
@@ -67,7 +63,7 @@ public class Twittertest {
         //--- Enviar y recibir mensajes directos
         /*
         twitter4j.Twitter sender = TwitterFactory.getSingleton();
-        twitter4j.DirectMessage  message = sender.sendDirectMessage("@pancho77", "Hola desde Java");*/
+        twitter4j.DirectMessage  message = sender.sendDirectMessage("@pancho77c", "Hola desde Java");*/
         
     }
 }
