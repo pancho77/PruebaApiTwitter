@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
@@ -12,7 +15,6 @@ import twitter4j.conf.ConfigurationBuilder;
 public class TwitterTest
 {
 
- 
     public static void main(String[] args) throws IOException, TwitterException{
         ConfigurationBuilder cb = new ConfigurationBuilder();
         
@@ -21,6 +23,9 @@ public class TwitterTest
             .setOAuthConsumerSecret("QLavVZJvSJWHSCcIu5p9u0kboPKrCqSrZl288uPdo0GdBbt35p");
         
         Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        
+        //TwitterFactory tf = new TwitterFactory(cb.build());
+        //twitter4j.Twitter twitter = tf.getInstance();
  
         // Si están seteados el Token y el TokenSecret la siguiente
         // linea lanzará IllegalStateException
@@ -70,7 +75,35 @@ public class TwitterTest
         System.out.println("Access token: " + accessToken.getToken());
         System.out.println("Access token secret: " + accessToken.getTokenSecret());
  
-        System.exit(0);
  
+        
+        List<twitter4j.Status> status = twitter.getHomeTimeline();//lista de stats
+        
+        // obtener username, stats, time of post, location
+        for(twitter4j.Status st : status){
+            System.out.println(st.getUser().getLocation()+"-----"+st.getUser().getName()+"-----"+st.getText());
+        }
+        
+         //-----------datos publicos del usuario
+        String datos="";
+        User usuario;
+            
+        usuario=twitter.showUser(twitter.getScreenName());
+        datos=usuario.toString();
+
+        twitter.showUser(twitter.getScreenName());
+        System.out.println(usuario);
+        
+        //------TimeLine del usuario
+        List<Status> statuses=null;
+        statuses = twitter.getUserTimeline();
+        System.out.println("Status--- "+statuses);
+        
+        //------Post tweet
+        twitter4j.Twitter mtwitter = TwitterFactory.getSingleton();
+        Status mstatus = twitter.updateStatus("Hola Mundo desde Java");
+        System.out.println("Exito al actualizar estado [" + mstatus.getText() + "].");
     }
 }
+
+
